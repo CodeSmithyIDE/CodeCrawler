@@ -1,0 +1,20 @@
+setting CODESMITHY_ROOT
+{
+    help = "Path to the CodeSmithy installation";
+    default = '$(CODESMITHY)';
+}
+
+template CodeSmithyCodeCrawlerCore
+{
+    includedirs += $(CODESMITHY_ROOT)/CodeCrawler/Include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(CODESMITHY_ROOT)/CodeCrawler/Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(CODESMITHY_ROOT)/CodeCrawler/Lib/$(arch);
+    }
+}

@@ -21,8 +21,17 @@
 */
 
 #include "CodeCrawlerTests.h"
+#include "CodeSmithy/CodeCrawler/Core/CodeCrawler.h"
 
 void AddCodeCrawlerTests(TestHarness& theTestHarness)
 {
     TestSequence& crawlerTestSequence = theTestHarness.appendTestSequence("CodeCrawler tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", CodeCrawlerCreationTest1, crawlerTestSequence);
+}
+
+TestResult::EOutcome CodeCrawlerCreationTest1()
+{
+    CodeSmithy::CodeCrawler crawler;
+    return TestResult::ePassed;
 }

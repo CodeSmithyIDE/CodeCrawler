@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddCodeCrawlerTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome CodeCrawlerCreationTest1();
+
 #endif

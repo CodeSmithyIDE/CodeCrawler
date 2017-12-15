@@ -26,6 +26,10 @@
 namespace CodeSmithy
 {
 
+class CodeCrawler
+{
+};
+
 }
 
 #endif
