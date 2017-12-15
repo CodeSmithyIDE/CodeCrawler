@@ -33,6 +33,11 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      CODESMITHY_ROOT  Path to the CodeSmithy installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -48,13 +53,23 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the CodeSmithy installation
+CODESMITHY_ROOT ?= $(CODESMITHY)
+
+# ------------
+
 all: $(_builddir)CodeSmithyCodeCrawlerWorker
 
 $(_builddir)CodeSmithyCodeCrawlerWorker: $(_builddir)CodeSmithyCodeCrawlerWorker_main.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCodeCrawlerWorker_main.o -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCodeCrawlerWorker_main.o -L$(CODESMITHY_ROOT)/CodeCrawler/Lib -pthread
 
 $(_builddir)CodeSmithyCodeCrawlerWorker_main.o: ../../Source/main.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread ../../Source/main.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/CodeCrawler/Include ../../Source/main.cpp
 
 clean:
 	rm -f $(_builddir)*.o

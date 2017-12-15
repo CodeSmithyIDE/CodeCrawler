@@ -20,7 +20,11 @@
     IN THE SOFTWARE.
 */
 
+#include "CodeSmithy/CodeCrawler/Core/CodeCrawler.h"
+
 int main(int argc, char* argv[])
 {
+    CodeSmithy::CodeCrawler crawler;
+
     return 0;
 }
