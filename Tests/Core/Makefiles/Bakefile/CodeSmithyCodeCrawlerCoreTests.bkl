@@ -20,8 +20,15 @@ program CodeSmithyCodeCrawlerCoreTests : IshikoTestFrameworkCore
         archs = x86 x86_64;
     }
 
+    headers
+    {
+        ../../Source/CodeCrawlerTests/CodeCrawlerTests.h
+    }
+
     sources
     {
         ../../Source/main.cpp
+
+        ../../Source/CodeCrawlerTests/CodeCrawlerTests.cpp
     }
 }

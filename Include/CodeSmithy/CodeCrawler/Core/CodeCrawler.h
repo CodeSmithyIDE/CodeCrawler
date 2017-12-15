@@ -23,4 +23,9 @@
 #ifndef _CODESMITHY_CODECRAWLER_CORE_CODECRAWLER_H_
 #define _CODESMITHY_CODECRAWLER_CORE_CODECRAWLER_H_
 
+namespace CodeSmithy
+{
+
+}
+
 #endif

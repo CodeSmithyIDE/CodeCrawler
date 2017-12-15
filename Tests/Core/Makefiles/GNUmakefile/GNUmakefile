@@ -71,11 +71,14 @@ ISHIKO_TESTFRAMEWORK_ROOT ?= $(ISHIKO)/TestFramework
 
 all: $(_builddir)CodeSmithyCodeCrawlerCoreTests
 
-$(_builddir)CodeSmithyCodeCrawlerCoreTests: $(_builddir)CodeSmithyCodeCrawlerCoreTests_main.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCodeCrawlerCoreTests_main.o -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
+$(_builddir)CodeSmithyCodeCrawlerCoreTests: $(_builddir)CodeSmithyCodeCrawlerCoreTests_main.o $(_builddir)CodeSmithyCodeCrawlerCoreTests_CodeCrawlerTests.o
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCodeCrawlerCoreTests_main.o $(_builddir)CodeSmithyCodeCrawlerCoreTests_CodeCrawlerTests.o -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)CodeSmithyCodeCrawlerCoreTests_main.o: ../../Source/main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
+
+$(_builddir)CodeSmithyCodeCrawlerCoreTests_CodeCrawlerTests.o: ../../Source/CodeCrawlerTests/CodeCrawlerTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CodeCrawlerTests/CodeCrawlerTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o

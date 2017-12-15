@@ -20,14 +20,9 @@
     IN THE SOFTWARE.
 */
 
-#include "CodeCrawlerTests/CodeCrawlerTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include "CodeCrawlerTests.h"
 
-int main(int argc, char* argv[])
+void AddCodeCrawlerTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCodeCrawlerCore");
-
-    AddCodeCrawlerTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& crawlerTestSequence = theTestHarness.appendTestSequence("CodeCrawler tests");
 }
